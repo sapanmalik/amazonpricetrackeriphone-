@@ -1,13 +1,13 @@
 require('dotenv').config()
 const sgmail=require('@sendgrid/mail')
-sgmail.setApikey(PROCESS.env.SENDGRIP_API_KEY)
-
+sgmail.setApikey(PROCESS.env.SENDGRIP_API_KEY)   // in   .env file give your generated API key 
+//this for api 
 
 const nightmare = require('nightmare')()
 
 checkprice()
 async function checkprice(){
-const pricestring=await nightmare.goto("https://www.amazon.in/New-Apple-iPhone-Pro-256GB/dp/B08L5V825S")
+const pricestring=await nightmare.goto("https://www.amazon.in/New-Apple-iPhone-Pro-256GB/dp/B08L5V825S") //you can change the url to track others iphone 
                                  .wait("#priceblock_ourprice")
                                  .evaluate(() =>
                                   document.getElementById
@@ -17,20 +17,20 @@ const pricestring=await nightmare.goto("https://www.amazon.in/New-Apple-iPhone-P
 
 
 const priceNumber =parseFloat(pricestring.replace('₹',''))
-if(priceNumber< 130000){
-sendemail('lets buy this')
+if(priceNumber< 130000){                                    //you can change your price according to your budget 
+sendemail('lets buy this')                                 //change what to message you want send to your mail
 }
 else {
-console.log("buy next time  when price go down")
+console.log("buy next time  when price go down")          //change the esle statement from this line if you want to change 
 }
              
 }
 
 
-function sendemail(subject,body){
+function sendemail(subject,body){                       ///send mail 
 const email={
-to:'pesexih975@5y5u.com',
-from:'sapanmalik4567@gmail.com',
+to:'pesexih975@5y5u.com',                               //this is send by the online emulator which generate one time mail for our use 
+from:'sapanmalik4567@gmail.com',                        //this the email of me for testing you can use any of yours
 subject:price_checker,
 text:body,
 html:body
